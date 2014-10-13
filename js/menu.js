@@ -11,8 +11,14 @@ var Sidebar = {
 		function open_sidebar(){
 			sidebar.css({'top':'auto'});
 
+			var sidebarHeight = sidebar.height();
+
+			$('#page').css({'min-height':sidebarHeight+'px'});
+
 			page.addClass('page_menu-opened');
 			content.css({'top':'-'+topScroll+'px'});
+
+			window.scrollTo(0,0);
 
 			Sidebar.top_scroll_state = topScroll;
 		}

@@ -5,7 +5,7 @@
 	position: relative;
 }
 
-.page_menu-opened .page, 
+.page_menu-opened, 
 .page_menu-opened .page__inner-wrapper{
 	overflow: hidden;
 }
