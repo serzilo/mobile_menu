@@ -15,7 +15,6 @@
 	margin-left: -220px;
 	width:220px;
 	background-color: #32394a;
-
 	position: absolute;
 }
 
@@ -25,11 +24,20 @@
 	-moz-transition: left 0.5s ease-out;
 	-o-transition: left 0.5s ease-out;
 	transition: left 0.5s ease-out;
-	transform: translateZ(0);
 }
 
 .page_menu-opened .main{
 	left:220px;
+}
+
+.main, 
+.sidebar, 
+.content{
+	transform: translateZ(0);
+}
+
+.main__inner{
+	min-height: 100%;
 }
 
 .sidebar__list{
@@ -80,6 +88,7 @@
 	background: #fff;
 	cursor: pointer;
 	visibility: hidden;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	opacity: 0;
 	filter: alpha(opacity=0);
 	-webkit-transition: visibility 0 .3s ,opacity .3s ease-out;
