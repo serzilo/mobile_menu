@@ -1,5 +1,3 @@
-
-
 var Sidebar = {
 	top_scroll_state : 0,
 	browser : false,
