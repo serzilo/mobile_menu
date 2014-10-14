@@ -2,34 +2,36 @@
 
 var Sidebar = {
 	top_scroll_state : 0,
+	browser : false,
 	toggle_menu : function(a){
-		var page = $('.page'),
+		var page = $('#page'),
 			content = $('#content'),
 			sidebar = $('#sidebar'),
 			topScroll = Sidebar.window_scroll_Y();
 
 		function open_sidebar(){
-			sidebar.css({'top':'auto'});
+			if (Sidebar.browser != 'operamini'){
+				var sidebarHeight = sidebar.height();
 
-			var sidebarHeight = sidebar.height();
+				page.addClass('page_menu-opened').css({'min-height':sidebarHeight+'px'});
+				content.css({'top':'-'+topScroll+'px'});
 
-			$('#page').css({'min-height':sidebarHeight+'px'});
-
-			page.addClass('page_menu-opened');
-			content.css({'top':'-'+topScroll+'px'});
-
-			window.scrollTo(0,0);
-
-			Sidebar.top_scroll_state = topScroll;
+				window.scrollTo(0,0);
+				Sidebar.top_scroll_state = topScroll;
+			}else{
+				page.addClass('page_menu-top_opened')
+			}
 		}
 
 		function close_sidebar(){
-			page.removeClass('page_menu-opened');
-			content.css({'top':'auto'});
+			if (Sidebar.browser != 'operamini'){
+				page.removeClass('page_menu-opened').css({'min-height':'0'});
+				content.css({'top':'auto'});
 
-			sidebar.css({'top':Sidebar.top_scroll_state+'px'});
-
-			window.scrollTo(0,Sidebar.top_scroll_state);
+				window.scrollTo(0,Sidebar.top_scroll_state);
+			}else{
+				page.removeClass('page_menu-top_opened')
+			}
 		}
 
 		if (a){
@@ -39,7 +41,7 @@ var Sidebar = {
 				close_sidebar();
 			}
 		}else{
-			if (!page.hasClass('page_menu-opened')){
+			if (!page.hasClass('page_menu-opened') && !page.hasClass('page_menu-top_opened')){
 				open_sidebar();
 			}else{
 				close_sidebar();
@@ -122,27 +124,33 @@ var Sidebar = {
 
 	    main.addEventListener('touchstart', mousedown, false);
 	    main.addEventListener('touchmove', mousemove, false);
+
+	},
+
+	browser_detect : function(){
+		if (!!navigator.userAgent.match(/(Opera Mini)/i)){
+			Sidebar.browser = 'operamini';
+			$('body').addClass('operamini');
+		}
 	},
 
 	init : function(){
-		Sidebar.swipe();
+		Sidebar.browser_detect();
+
+		if (Sidebar.browser != 'operamini'){
+			Sidebar.swipe();
+		}
 
 		$('#toggle_menu').on('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
-			Sidebar.toggle_menu(1);
+			Sidebar.toggle_menu();
 		});
 
 		$('#shadow').on('click',function(e){
 			e.preventDefault();
 			e.stopPropagation();
 			Sidebar.toggle_menu(0);
-		});
-
-		$('#fixed_button').on('click',function(e){
-			e.preventDefault();
-			e.stopPropagation();
-			Sidebar.toggle_menu();
 		});
 	}
 };

@@ -16,14 +16,11 @@
 	width:220px;
 	background-color: #32394a;
 	position: absolute;
+	top: auto;
 }
 
 .main{
 	left:0;
-	-webkit-transition: left 0.5s ease-out;
-	-moz-transition: left 0.5s ease-out;
-	-o-transition: left 0.5s ease-out;
-	transition: left 0.5s ease-out;
 }
 
 .page_menu-opened .main{
@@ -79,6 +76,16 @@
 	border-bottom: 1px solid #133783;
 }
 
+.header__button{
+	display: block;
+	text-decoration: none;
+	width: 50px;
+	height: 50px;
+	text-indent: -9999px;
+	border-right: 1px solid #133783;
+	background: url('../img/icon_menu.png') no-repeat center;
+}
+
 .shadow{
 	position: absolute;
 	top: 0;
@@ -97,7 +104,12 @@
 	transition: visibility 0 .3s, opacity .3s ease-out;
 }
 
-.page_menu-opened .shadow{
+.operamini .shadow{
+	top: 50px;
+}
+
+.page_menu-opened .shadow,
+.page_menu-top_opened .shadow{
 	visibility: visible;
 	opacity: 0.5;
 	filter: alpha(opacity=50);
@@ -107,23 +119,21 @@
 	transition: opacity .3s ease-out;
 }
 
-.fish{
-	padding: 10px;
+.page_menu-top_opened .sidebar{
+	margin: 0;
+	top: 50px;
+	width: 100%;
+	z-index: 100;
+	min-height: 0;
+}
+
+.page_menu-top_opened .main__inner{
 	position: relative;
 }
 
-.fixed-button{
-	position: fixed;
-	bottom: 10%;
-	right: 10%;
-	width: 50px;
-	height: 50px;
-	cursor: pointer;
-	background: #000;
-	visibility: visible;
-	opacity: 0.7;
-	filter: alpha(opacity=70);
-	z-index: 100;
+.fish{
+	padding: 10px;
+	position: relative;
 }
 
 .page_menu-opened .content{
